@@ -13,16 +13,20 @@ module.exports = db =>
         callbackURL: `${HOST}/auth/google/redirect`
       },
       async (accessToken, refreshToken, profile, next) => {
-        const user = await db.collection('users').findOne({ googleId: profile.id });
-        if (!user) {
-          const newUser = await db.collection('users').insertOne({
-            googleId: profile.id,
-            username: profile.displayName,
-            avatar: profile._json.picture
-          });
-          next(null, newUser);
-        } else {
-          next(null, user);
+        try {
+          const user = await db.collection('users').findOne({ googleId: profile.id });
+          if (!user) {
+            const newUser = await db.collection('users').insertOne({
+              googleId: profile.id,
+              username: profile.displayName,
+              avatar: profile._json.picture
+            });
+            next(null, newUser);
+          } else {
+            next(null, user);
+          }
+        } catch (err) {
+          console.log(err.message, err.stack);
         }
       }
     )
