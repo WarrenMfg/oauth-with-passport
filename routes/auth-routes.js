@@ -16,9 +16,13 @@ router.get('/logout', (req, res) => {
 router.get('/google', passport.authenticate('google', { scope: [ 'profile' ] }));
 
 // google callback/redirect
-router.get('/google/redirect', passport.authenticate('google', { failureRedirect: '/auth/login' }), (req, res) => {
-  // Successful authentication, redirect home.
-  res.redirect('/');
-});
+router.get(
+  '/google/redirect',
+  passport.authenticate('google', { failureRedirect: '/auth/login', session: false }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
 
 module.exports = router;
