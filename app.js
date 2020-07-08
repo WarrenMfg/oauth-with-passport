@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const authRoutes = require('./routes/auth-routes');
 
 const app = express();
@@ -9,6 +10,7 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 // middleware
+app.use(passport.initialize());
 app.use('/auth', authRoutes);
 
 // create home route
