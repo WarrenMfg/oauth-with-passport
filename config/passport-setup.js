@@ -1,9 +1,22 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, HOST } = require('./config');
-// const { db } = require('../app');
+const { ObjectId } = require('mongodb');
 
-module.exports = db =>
+module.exports = db => {
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
+  });
+
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await db.collection('users').findOne({ _id: ObjectId.createFromHexString(id) });
+      done(null, user);
+    } catch (err) {
+      console.log(err.message, err.stack);
+    }
+  });
+
   passport.use(
     new GoogleStrategy(
       {
@@ -12,7 +25,7 @@ module.exports = db =>
         clientSecret: GOOGLE_CLIENT_SECRET,
         callbackURL: `${HOST}/auth/google/redirect`
       },
-      async (accessToken, refreshToken, profile, next) => {
+      async (accessToken, refreshToken, profile, done) => {
         try {
           const user = await db.collection('users').findOne({ googleId: profile.id });
           if (!user) {
@@ -21,9 +34,9 @@ module.exports = db =>
               username: profile.displayName,
               avatar: profile._json.picture
             });
-            next(null, newUser);
+            done(null, newUser);
           } else {
-            next(null, user);
+            done(null, user);
           }
         } catch (err) {
           console.log(err.message, err.stack);
@@ -31,3 +44,4 @@ module.exports = db =>
       }
     )
   );
+};
