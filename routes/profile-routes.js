@@ -1,7 +1,12 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
-  res.send('You are logged in. This is your profile - ' + req.user.username);
+const isLoggedIn = (req, res, next) => {
+  if (req.user) next();
+  else res.redirect('/auth/login');
+};
+
+router.get('/', isLoggedIn, (req, res) => {
+  res.render('profile', { user: req.user });
 });
 
 module.exports = router;
