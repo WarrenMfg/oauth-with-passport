@@ -1,9 +1,10 @@
 const express = require('express');
 const passport = require('passport');
 const authRoutes = require('./routes/auth-routes');
+const connect = require('./db');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // set view engine
 app.set('views', './views');
@@ -18,4 +19,8 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.listen(PORT, () => console.log(`OAuth listening on port ${PORT}`));
+(async () => {
+  module.exports.db = await connect();
+  require('./config/passport-setup');
+  app.listen(PORT, () => console.log(`OAuth listening on port ${PORT}`));
+})();
