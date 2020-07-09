@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app",
-    "startDev": "nodemon app"
+    "start": "node -r dotenv/config app",
+    "startDev": "nodemon -r dotenv/config app"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/WarrenMfg/oauth-with-passport#readme",
   "dependencies": {
     "cookie-session": "^1.4.0",
+    "dotenv": "^8.2.0",
     "ejs": "^2.5.7",
     "express": "^4.16.1",
     "mongodb": "^3.5.9",

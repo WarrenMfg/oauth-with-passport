@@ -1,7 +1,6 @@
 const { MongoClient } = require('mongodb');
-// const { URI } = require('./config/config');
 
-const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 module.exports = async () => {
   try {

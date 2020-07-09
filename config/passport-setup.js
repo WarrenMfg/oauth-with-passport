@@ -1,6 +1,5 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-// const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, HOST } = require('./config');
 const { ObjectId } = require('mongodb');
 
 module.exports = db => {
@@ -21,9 +20,11 @@ module.exports = db => {
     new GoogleStrategy(
       {
         // options for strategy
-        clientID: GOOGLE_CLIENT_ID,
-        clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: `${HOST}/auth/google/redirect`
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: `${process.env.NODE_ENV === 'production'
+          ? process.env.HOST_PROD
+          : process.env.HOST_DEV}/auth/google/redirect`
       },
       async (accessToken, refreshToken, profile, done) => {
         try {

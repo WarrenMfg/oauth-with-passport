@@ -5,7 +5,6 @@ const authRoutes = require('./routes/auth-routes');
 const profileRoutes = require('./routes/profile-routes');
 const connect = require('./db');
 const cookieSession = require('cookie-session');
-// const { COOKIE_KEY } = require('./config/config');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [ COOKIE_KEY ]
+    keys: [ process.env.COOKIE_KEY ]
   })
 );
 app.use(passport.initialize());
