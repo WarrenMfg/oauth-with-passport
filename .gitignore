@@ -62,3 +62,6 @@ package-lock.json
 
 # config
 config.js
+
+# notes
+NOTES.txt
