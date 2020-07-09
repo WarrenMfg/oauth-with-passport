@@ -1,6 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, HOST } = require('./config');
+if (!process.env.NODE_ENV) {
+  var { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, HOST } = require('./config');
+}
 const { ObjectId } = require('mongodb');
 
 module.exports = db => {

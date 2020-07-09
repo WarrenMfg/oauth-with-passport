@@ -1,7 +1,7 @@
 {
-  "name": "oauth-playlist",
+  "name": "oauth-with-passport",
   "version": "1.0.0",
-  "description": "Course files for The Net Ninja OAuth playlist on YouTube",
+  "description": "Fork of The Net Ninja OAuth playlist on YouTube",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,14 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iamshaunjp/oauth-playlist.git"
+    "url": "git+https://github.com/WarrenMfg/oauth-with-passport"
   },
   "author": "The Net Ninja",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/iamshaunjp/oauth-playlist/issues"
-  },
-  "homepage": "https://github.com/iamshaunjp/oauth-playlist#readme",
+  "homepage": "https://github.com/WarrenMfg/oauth-with-passport#readme",
   "dependencies": {
     "cookie-session": "^1.4.0",
     "ejs": "^2.5.7",
