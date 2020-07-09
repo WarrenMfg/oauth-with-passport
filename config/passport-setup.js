@@ -23,8 +23,8 @@ module.exports = db => {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: `${process.env.NODE_ENV === 'production'
-          ? process.env.HOST_PROD
-          : process.env.HOST_DEV}/auth/google/redirect`
+          ? process.env.HOST_PROD + '/auth/google/redirect'
+          : process.env.HOST_DEV + '/auth/google/redirect'}`
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
