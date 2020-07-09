@@ -1,7 +1,5 @@
 const { MongoClient } = require('mongodb');
-if (!process.env.NODE_ENV) {
-  var { URI } = require('./config/config');
-}
+// const { URI } = require('./config/config');
 
 const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 

@@ -5,9 +5,7 @@ const authRoutes = require('./routes/auth-routes');
 const profileRoutes = require('./routes/profile-routes');
 const connect = require('./db');
 const cookieSession = require('cookie-session');
-if (!process.env.NODE_ENV) {
-  var { COOKIE_KEY } = require('./config/config');
-}
+// const { COOKIE_KEY } = require('./config/config');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
