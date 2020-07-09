@@ -43,6 +43,7 @@ module.exports = db => {
           }
         } catch (err) {
           console.log(err.message, err.stack);
+          done(err);
         }
       }
     )
